@@ -1,42 +1,37 @@
+
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {getAdminInfo} from '@api/getData'
-import createPersiste from 'vue-savedata';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const state = {
-    adminInfo: {
-        avatar: 'default.jpg'
-    },
-}
-
-const mutations = {
-    saveAdminInfo(state, adminInfo) {
-        state.adminInfo = adminInfo;
-    }
-}
-
-const actions = {
-    async getAdminData({commit}) {
-        try {
-            const res = await getAdminInfo();
-            if (res.status == 1) {
-                commit('saveAddminInfo', res.data)
-            } else {
-                // 掉接口失败
-                throw new Error(res.type);
+const store = new Vuex.Store({
+    state: {
+        author: 'superxqy',
+        carList: null,
+        userInfo: {
+            isLogin: false,
+            name: ''
+        },
+        mutations: {
+            change(state, time) {
+                state.author += time;
+            },
+            updateCart(state, obj) {
+                state.carList = obj;
+            },
+            updateUserInfo(state, obj) {
+                state.userInfo = Object.assign({}, obj);
             }
-        } catch (error) {
-            console.log(error.message);
-
+        },
+        actions: {
+            updateActionsUser(context, obj) {
+                context.commit('updateUserInfo', obj);
+            },
+            updateActonsCart(context, obj) {
+                context.commit('updateCart', obj)
+            }
         }
     }
-}
+});
 
-export default new Vuex.Store({
-    state,
-    actions,
-    mutations,
-    plugins: [createPersiste()]
-})
+export default store;
