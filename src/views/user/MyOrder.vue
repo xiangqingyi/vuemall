@@ -5,7 +5,7 @@
             <div class="row">
                 <Tabs :tabs="tabs" v-on:tabClick="tabClick"/>
 
-                <table v-if="!noData" class="table table-hover table-bordered" v-for="item in orderList">
+                <table v-if="!noData" class="table table-hover table-bordered" v-for="item in orderList" :key="item.index">
                     <thead>
                     <tr>
                         <th colspan="7">
@@ -20,7 +20,7 @@
                     <tbody>
                     <tr>
                         <td colspan="2">
-                            <div class="product" v-for="e in item.goodsList">
+                            <div class="product" v-for="e in item.goodsList" :key="e.index">
                                 <div><img class="cartImg" :src="`static/products/${e.product.image}`"/></div>
                                 <div>{{e.product.name}}</div>
                                 <div>×{{e.sum}}</div>
