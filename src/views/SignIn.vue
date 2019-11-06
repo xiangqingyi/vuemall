@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang="jade">
     .login_register
        .loginTips.alert.alert-danger(v-show="isLoginTips") 当前账号无权限，请联系管理员！
        .row
